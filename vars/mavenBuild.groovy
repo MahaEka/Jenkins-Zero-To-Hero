@@ -1,3 +1,3 @@
 def buildArtifact() {
-  sh 'mvn package'
+  sh 'mvn clean test'
 }
