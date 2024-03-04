@@ -1,3 +1,3 @@
-def buildArtifact() {
+def call() {
   sh 'mvn clean test'
 }
