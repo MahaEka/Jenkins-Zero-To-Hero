@@ -1,4 +1,5 @@
 def call() {
     // Perform Maven build
-    sh 'mvn package'
+    def mvnCmd = 'mvn package'
+    sh script: mvnCmd, returnStatus: true
 }
