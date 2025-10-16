@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        APP_NAME        = "java-spring-boot-app"
-        IMAGE_NAME      = "java-spring-boot-app"
+        APP_NAME        = "python-todo-app"
+        IMAGE_NAME      = "python-todo-app"
         IMAGE_TAG       = "v1"
-        DOCKERFILE_PATH = "java-maven-sonar-argocd-helm-k8s/Dockerfile"
-        BUILD_CONTEXT   = "java-maven-sonar-argocd-helm-k8s"
+        DOCKERFILE_PATH = "python-jenkins-argocd-k8s/Dockerfile"
+        BUILD_CONTEXT   = "python-jenkins-argocd-k8s"
     }
 
     stages {
@@ -50,8 +50,8 @@ pipeline {
                     echo "🚀 Running container..."
                     sh '''
                         docker rm -f ${APP_NAME} || true
-                        docker run -d -p 8080:8080 --name ${APP_NAME} ${IMAGE_NAME}:${IMAGE_TAG}
-                        echo "Application is accessible at: http://localhost:8080"
+                        docker run -d -p 8000:8000 --name ${APP_NAME} ${IMAGE_NAME}:${IMAGE_TAG}
+                        echo "Application is accessible at: http://localhost:8000"
                         docker ps
                     '''
                 }
@@ -63,7 +63,7 @@ pipeline {
                 script {
                     echo "🔎 Verifying if container is running..."
                     sh 'docker ps | grep ${APP_NAME} || (echo "❌ Container not running!" && exit 1)'
-                    echo "✅ Spring Boot container is up and running successfully!"
+                    echo "✅ Python Todo App container is up and running successfully!"
                 }
             }
         }
